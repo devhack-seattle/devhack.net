@@ -1,0 +1,20 @@
+body {
+    background: black;
+    color: lime;
+    font-family: monospace;
+    margin: 100px 20%;
+    border: 10px red;
+    font-size: 125%;
+}
+input[type="text"] {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    outline: none;
+    font: inherit;
+    caret-shape: block;
+}
+h1,p {
+    margin: 40px 0px;
+}
+
