@@ -32,3 +32,20 @@ dt::before {
 ul {
     list-style-type: '- ';
 }
+
+.address-hide {
+    opacity: 0.5;
+}
+
+@media only screen and (min-width: 768px)  { 
+    /* For desktop, only show the address on hover. For mobile devices let's not
+    make people go through that. */
+    .address-hide {
+        display: none;
+    }
+}
+
+.address:hover .address-hide,
+.address-hide:hover .address-hide {
+    display: inline;
+}
