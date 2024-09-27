@@ -19,15 +19,19 @@ function drawEventList(events) {
         weekday: 'long',
         month: "numeric",
         day: "numeric",
+    };
+    const timeOptions = {
         hour: "numeric",
         minute: "numeric",
     };
     const ul = document.createElement('ul');
     events.forEach(event => {
         const li = document.createElement('li');
-        const dateStr = `${event.start.toLocaleString('en-US', dateOptions)}`.toLocaleLowerCase();
+        const dateStr = `${event.start.toLocaleDateString('en-US', dateOptions)}`.toLocaleLowerCase();
+        const timeStr = `${event.start.toLocaleTimeString('en-US', timeOptions)}–${event.end.toLocaleTimeString('en-US', timeOptions)}`.toLocaleLowerCase();
         const recurrenceStr = event.recurrence ? ` (${event.recurrence})` : '';
-        li.textContent = `${event.summary}: ${dateStr}${recurrenceStr}`;
+        const descriptionStr = event.description ? `<br>${event.description}` : '';
+        li.innerHTML = `${event.summary}<span class="secondary">${descriptionStr}<br>${dateStr}${recurrenceStr}<br>${timeStr}</span>`;
         ul.appendChild(li);
     });
     return ul;
@@ -93,7 +97,9 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
                 if (next.compare(sixHoursAgo) >= 0) {
                     upcomingEvents.push({
                         summary: icalEvent.summary,
+                        description: icalEvent.description,
                         start: next.toJSDate(),
+                        end: icalEvent.endDate.toJSDate(),
                         recurrence: describeRecurrence(icalEvent)
                     });
                     break;
@@ -104,7 +110,9 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
             if (eventStart.compare(sixHoursAgo) >= 0) {
                 upcomingEvents.push({
                     summary: icalEvent.summary,
-                    start: eventStart.toJSDate()
+                    description: icalEvent.description,
+                    start: eventStart.toJSDate(),
+                    end: icalEvent.endDate.toJSDate(),
                 });
             }
         }
