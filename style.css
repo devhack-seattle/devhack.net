@@ -2,9 +2,9 @@ body {
     background: black;
     color: lime;
     font-family: monospace;
-    margin: 100px 20%;
+    margin: 100px 20% 5% 20%;
     border: 10px red;
-    font-size: 125%;
+    font-size: 15px;
 }
 
 .secondary {
