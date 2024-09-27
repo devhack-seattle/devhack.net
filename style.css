@@ -6,6 +6,11 @@ body {
     border: 10px red;
     font-size: 125%;
 }
+
+.secondary {
+    color: #00b300;
+}
+
 input[type="text"] {
     background-color: inherit;
     color: inherit;
@@ -34,4 +39,10 @@ dt::before {
 
 ul {
     list-style-type: '- ';
+}
+
+.small {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50%;
 }
