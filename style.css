@@ -18,12 +18,15 @@ h1,p {
     margin: 40px 0px;
 }
 
-a {
-    color: cyan;
+a, a:visited {
+    color: #84d7ba;
+    text-decoration: none;
 }
-a:visited {
-    color: mediumaquamarine;
-}
+
+a:hover {
+    color: #d784a1;
+  }
+
 dt::before {
     content: ">";
     padding-right: 0.5em;
