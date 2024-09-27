@@ -19,8 +19,13 @@ input[type="text"] {
     font: inherit;
     caret-shape: block;
 }
-h1,p {
+
+h1, .block {
     margin: 40px 0px;
+}
+
+p {
+	margin: 0.5em 0;
 }
 
 a, a:visited {
