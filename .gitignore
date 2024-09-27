@@ -1,0 +1,3 @@
+# Calendar file used for local development. On a production server, the calendar
+# file is made available at the same path by reverse proxy.
+calendar.ics
