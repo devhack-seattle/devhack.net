@@ -28,7 +28,7 @@ function drawEventList(events) {
     events.forEach(event => {
         const li = document.createElement('li');
         const dateStr = `${event.start.toLocaleDateString('en-US', dateOptions)}`.toLocaleLowerCase();
-        const timeStr = `${event.start.toLocaleTimeString('en-US', timeOptions)}–${event.end.toLocaleTimeString('en-US', timeOptions)}`.toLocaleLowerCase();
+        const timeStr = `${event.start.toLocaleTimeString('en-US', timeOptions)} - ${event.end.toLocaleTimeString('en-US', timeOptions)}`.toLocaleLowerCase();
         const recurrenceStr = event.recurrence ? ` (${event.recurrence})` : '';
         const descriptionStr = event.description ? `<br>${event.description}` : '';
         li.innerHTML = `${event.summary}<span class="secondary">${descriptionStr}<br>${dateStr}${recurrenceStr}<br>${timeStr}</span>`;
