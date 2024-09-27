@@ -8,8 +8,7 @@ jobs:
     container:
       image: git.devhack.net/devhack/containers/deployer:latest
     steps:
-      - uses: actions/checkout@v4
-      - name: kubectl diff and deploy
+      - name: rollout kubernetes deployment
         run: |
           set -euo pipefail
           echo "${{ secrets.KUBERNETES_CLIENT_CONFIG }}" > ~/.kube/config
