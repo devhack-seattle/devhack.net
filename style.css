@@ -7,6 +7,15 @@ body {
     font-size: 15px;
 }
 
+/* Mobile devices get slightly smaller margins, so that we actually have room
+ * for text.
+ */
+@media only screen and (max-width: 600px) {
+    body {
+        margin: 50px 10% 5% 10%;
+    }
+}
+
 .secondary {
     color: #00b300;
 }
