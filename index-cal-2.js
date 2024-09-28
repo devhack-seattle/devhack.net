@@ -1,4 +1,4 @@
-// assumes ical.js loaded
+// assumes ical.js, rrule.js loaded
 
 const icsUrl = 'calendar.ics';
 
@@ -29,9 +29,9 @@ function drawEventList(events) {
         const li = document.createElement('li');
         const dateStr = `${event.start.toLocaleDateString('en-US', dateOptions)}`.toLocaleLowerCase();
         const timeStr = `${event.start.toLocaleTimeString('en-US', timeOptions)} - ${event.end.toLocaleTimeString('en-US', timeOptions)}`.toLocaleLowerCase();
-        const recurrenceStr = event.recurrence ? ` (${event.recurrence})` : '';
         const descriptionStr = event.description ? `<br>${event.description}` : '';
-        li.innerHTML = `${event.summary}<span class="secondary">${descriptionStr}<br>${dateStr}${recurrenceStr}<br>${timeStr}</span>`;
+        const recurrence = event.recurrence ? `${event.recurrence}<br>`.toLocaleLowerCase() : '';
+        li.innerHTML = `${event.summary}<span class="secondary">${descriptionStr}<br>${recurrence}${dateStr}<br>${timeStr}</span>`;
         ul.appendChild(li);
     });
     return ul;
@@ -39,38 +39,10 @@ function drawEventList(events) {
 
 // Given an ical event, return a human-readable description of the recurrence
 // (such as "every week").
-//
-// TODO: This is jank english language hacking - maybe use a library for this?
 function describeRecurrence(icalEvent) {
-    const rrule = icalEvent.component.getFirstPropertyValue('rrule');
-    if (!rrule) return 'recurring';
-
-    let description = 'every ';
-    if (rrule.interval > 1) {
-        description += rrule.interval + ' ';
-    }
-
-    switch (rrule.freq) {
-        case 'DAILY':
-            description += 'day';
-            break;
-        case 'WEEKLY':
-            description += 'week';
-            break;
-        case 'MONTHLY':
-            description += 'month';
-            break;
-        case 'YEARLY':
-            description += 'year';
-            break;
-        default:
-            description += rrule.freq.toLowerCase();
-    }
-    if (rrule.interval > 1) {
-        description += 's';
-    }
-
-    return description;
+    const ruleStr = icalEvent.component.getFirstPropertyValue('rrule').toString();
+    const parsed = rrule.RRule.fromString(ruleStr);
+    return parsed.toText();
 }
 
 // Given a parsed ical.js calendar, return a list of upcoming events ("upcoming"
