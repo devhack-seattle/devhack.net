@@ -2,6 +2,7 @@ body {
     background: black;
     color: lime;
     font-family: monospace;
+    line-height: 1.15;
     margin: 100px 20% 5% 20%;
     border: 10px red;
     font-size: 15px;
