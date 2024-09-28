@@ -94,12 +94,17 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
             // only add the next instance (later we show the recurrence)
             // so this actually only runs once
             while (next = expand.next()) {
-                if (next.compare(sixHoursAgo) >= 0) {
+                const duration = icalEvent.duration;
+
+                const end = next.clone();
+                end.addDuration(duration);
+
+                if (end.compare(sixHoursAgo) >= 0) {
                     upcomingEvents.push({
                         summary: icalEvent.summary,
                         description: icalEvent.description,
                         start: next.toJSDate(),
-                        end: icalEvent.endDate.toJSDate(),
+                        end: end.toJSDate(),
                         recurrence: describeRecurrence(icalEvent)
                     });
                     break;
