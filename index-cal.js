@@ -46,13 +46,13 @@ function describeRecurrence(icalEvent) {
 }
 
 // Given a parsed ical.js calendar, return a list of upcoming events ("upcoming"
-// here, for now, means events after six hours ago. This is so that in-progress
+// here, for now, means events after 3 hours ago. This is so that in-progress
 // events are still shown).
 function getUpcomingEvents(vcalendar, numEvents = 10) {
     const events = vcalendar.getAllSubcomponents('vevent');
 
-    const sixHoursAgo = ICAL.Time.now();
-    sixHoursAgo.addDuration(ICAL.Duration.fromSeconds(-6 * 60 * 60));
+    const hoursAfterEnd = ICAL.Time.now();
+    hoursAfterEnd.addDuration(ICAL.Duration.fromSeconds(-3 * 60 * 60));
 
     const upcomingEvents = [];
 
@@ -70,8 +70,7 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
 
                 const end = next.clone();
                 end.addDuration(duration);
-
-                if (end.compare(sixHoursAgo) >= 0) {
+                if (end.compare(hoursAfterEnd) >= 0) {
                     upcomingEvents.push({
                         summary: icalEvent.summary,
                         description: icalEvent.description,
@@ -84,7 +83,7 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
             }
         } else {
             const eventStart = icalEvent.startDate;
-            if (eventStart.compare(sixHoursAgo) >= 0) {
+            if (eventStart.compare(hoursAfterEnd) >= 0) {
                 upcomingEvents.push({
                     summary: icalEvent.summary,
                     description: icalEvent.description,
