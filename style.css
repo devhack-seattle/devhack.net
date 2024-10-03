@@ -8,12 +8,20 @@ body {
     font-size: 15px;
 }
 
+ul {
+    list-style-type: '- ';
+}
+
+li {
+    margin-top: 0.5em;
+}
+
 /* Mobile devices get slightly smaller margins, so that we actually have room
  * for text.
  */
 @media only screen and (max-width: 600px) {
     body {
-        margin: 50px 10% 5% 10%;
+        margin: 50px 5% 5% 5%;
     }
 }
 
@@ -50,14 +58,6 @@ a:hover {
 dt::before {
     content: ">";
     padding-right: 0.5em;
-}
-
-ul {
-    list-style-type: '- ';
-}
-
-li {
-    margin-top: 0.5em;
 }
 
 .small {
