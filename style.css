@@ -1,7 +1,7 @@
 body {
     background: black;
     color: lime;
-    font-family: monospace;
+    font-family: Menlo, 'Cascadia Code', Consolas, Courier, monospace;
     line-height: 1.15;
     margin: 100px 20% 5% 20%;
     border: 10px red;
