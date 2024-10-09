@@ -2,6 +2,20 @@
 
 const icsUrl = 'calendar.ics';
 
+function escape(str) {
+    return str.replace(/[&<>"'/]/g, function (char) {
+        const escapeMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&apos;',
+            '/': '&#47;'
+        };
+        return escapeMap[char] || char;
+    });
+}
+
 async function fetchCalendar(url) {
     const response = await fetch(url);
     if (!response.ok) {
@@ -29,9 +43,9 @@ function drawEventList(events) {
         const li = document.createElement('li');
         const dateStr = `${event.start.toLocaleDateString('en-US', dateOptions)}`.toLocaleLowerCase();
         const timeStr = `${event.start.toLocaleTimeString('en-US', timeOptions)} - ${event.end.toLocaleTimeString('en-US', timeOptions)}`.toLocaleLowerCase();
-        const descriptionStr = event.description ? `<br>${event.description}` : '';
+        const descriptionStr = event.description ? `<br>${escape(event.description)}` : '';
         const recurrence = event.recurrence ? `${event.recurrence}<br>`.toLocaleLowerCase() : '';
-        li.innerHTML = `${event.summary}<span class="secondary">${descriptionStr}<br>${recurrence}${dateStr}<br>${timeStr}</span>`;
+        li.innerHTML = `${escape(event.summary)}<span class="secondary">${descriptionStr}<br>${recurrence}${dateStr}<br>${timeStr}</span>`;
         ul.appendChild(li);
     });
     return ul;
