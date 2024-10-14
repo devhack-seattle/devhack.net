@@ -70,10 +70,19 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
 
     const upcomingEvents = [];
 
+    let titlesSeen = new Set();
+
     events.forEach(event => {
         const icalEvent = new ICAL.Event(event);
 
         if (icalEvent.isRecurring()) {
+            // an attempt at preventing duplicate events when the same event was
+            // preempted by an one-off instance created by editing the single
+            // occurrence in NextCloud.
+            if (titlesSeen.has(icalEvent.summary)) {
+                return;
+            }
+        
             const expand = icalEvent.iterator();
             let next;
 
@@ -85,6 +94,7 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
                 const end = next.clone();
                 end.addDuration(duration);
                 if (end.compare(hoursAfterEnd) >= 0) {
+                    titlesSeen.add(icalEvent.summary);
                     upcomingEvents.push({
                         summary: icalEvent.summary,
                         description: icalEvent.description,
@@ -98,6 +108,7 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
         } else {
             const eventStart = icalEvent.startDate;
             if (eventStart.compare(hoursAfterEnd) >= 0) {
+                titlesSeen.add(icalEvent.summary);
                 upcomingEvents.push({
                     summary: icalEvent.summary,
                     description: icalEvent.description,
@@ -107,6 +118,8 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
             }
         }
     });
+
+    console.log("events added: " + Array.from(titlesSeen));
 
     return upcomingEvents.sort((a, b) => a.start - b.start).slice(0, numEvents);
 }
