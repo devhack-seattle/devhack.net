@@ -7,6 +7,7 @@
 <script src="vendor/ical.min.js"></script>
 <script src="vendor/rrule.2.8.1.min.js"></script>
 <script defer src="index-cal.js"></script>
+<script defer src="index-spaceapi.js"></script>
 
 <body>
 
@@ -26,6 +27,12 @@
                <a href="https://wiki.devhack.net/Accessibility">accessibility</a>
           </span>
      </p>
+     <h2>status <span class="small">(<a href="/spaceapi.json">spaceapi</a>)</span></h2>
+     <pre id="spaceapi-body">
+          <ul>
+               <li>loading... (do you have JavaScript?)</li>
+          </ul>
+     </pre>
      <h2>calendar <span class="small">(<a href="/calendar.ics">ics</a>)</span></h2>
      <div id="cal-parsed">
           <ul>
