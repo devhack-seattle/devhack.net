@@ -22,13 +22,27 @@ async function doSpaceapi(url, targetElementId) {
         const spaceapi = await (await fetch(url)).json();
         console.log(spaceapi);
         const state = spaceapi["state"];
+        const sensors = spaceapi["sensors"];
 
-        targetElement.innerHTML = `
-{
-    "open": "${escape(state.open.toString())}",
-    "lastchange": "${escape(state.lastchange.toString())}"
-}
-`;
+        var openHtml = '';
+        if (state && state.lastchange && typeof state.open !== 'undefined') {
+            const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+            const elapsed = state.lastchange - Date.now() / 1000.0;
+            const unit = elapsed < 3600 ? 'minutes' : 'hours';
+            const elapsedInUnit = Math.round(elapsed < 3600 ? elapsed / 60 : elapsed / 3600);
+            if (state.open) {
+                openHtml = 'someone might be at the space (as of ' + rtf.format(elapsedInUnit, unit) + ') :D <br>';
+            } else {
+                openHtml = 'the space is probably closed (as of ' + rtf.format(elapsedInUnit, unit) + ') <br>';
+            }
+        }
+
+        var tempHtml = '';
+        if (sensors && sensors.temperature && sensors.temperature.length > 0) {
+            tempHtml = 'it is about ' + sensors.temperature[0].value + sensors.temperature[0].unit + ' inside'
+        }
+
+        targetElement.innerHTML = '<p>' + openHtml + tempHtml + '</p>';
     }
     catch (error) {
         targetElement.innerHTML = '<p>Sorry - couldn\'t load the spaceapi :(</p> <small>' + error + '</small>';
