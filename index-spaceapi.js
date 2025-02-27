@@ -28,8 +28,8 @@ async function doSpaceapi(url, targetElementId) {
         if (state && state.lastchange && typeof state.open !== 'undefined') {
             const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
             const elapsed = state.lastchange - Date.now() / 1000.0;
-            const unit = elapsed < 3600 ? 'minutes' : 'hours';
-            const elapsedInUnit = Math.round(elapsed < 3600 ? elapsed / 60 : elapsed / 3600);
+            const unit = Math.abs(elapsed) < 3600 ? 'minutes' : 'hours';
+            const elapsedInUnit = Math.round(Math.abs(elapsed) < 3600 ? elapsed / 60 : elapsed / 3600);
             if (state.open) {
                 openHtml = 'someone might be at the space (as of ' + rtf.format(elapsedInUnit, unit) + ') :D <br>';
             } else {
@@ -39,7 +39,9 @@ async function doSpaceapi(url, targetElementId) {
 
         var tempHtml = '';
         if (sensors && sensors.temperature && sensors.temperature.length > 0) {
-            tempHtml = 'it is about ' + sensors.temperature[0].value + sensors.temperature[0].unit + ' inside'
+            const temp = Math.round(sensors.temperature[0].value);
+            const unit = sensors.temperature[0].unit;
+            tempHtml = 'the temperature is about ' + temp + unit + ' inside'
         }
 
         targetElement.innerHTML = '<p>' + openHtml + tempHtml + '</p>';
