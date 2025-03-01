@@ -41,7 +41,7 @@ async function doSpaceapi(url, targetElementId) {
         if (sensors && sensors.temperature && sensors.temperature.length > 0) {
             const temp = Math.round(sensors.temperature[0].value);
             const unit = sensors.temperature[0].unit;
-            tempHtml = 'the temperature is about ' + temp + unit + ' inside'
+            tempHtml = 'it is ' + temp + unit + ' inside'
         }
 
         targetElement.innerHTML = '<p>' + openHtml + tempHtml + '</p>';
