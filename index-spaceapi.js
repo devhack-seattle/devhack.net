@@ -40,18 +40,15 @@ async function doSpaceapi(url, targetElementId) {
         if (state && state.lastchange && typeof state.open !== 'undefined') {
             const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
             const elapsed = secondsToValueInUnit(state.lastchange - (Date.now() / 1000.0));
-            if (state.open) {
-                openHtml = 'space: doors open, as of ' + rtf.format(elapsed[0], elapsed[1]) + ' :D <br>';
-            } else {
-                openHtml = 'space: closed, as of ' + rtf.format(elapsed[0], elapsed[1]) + ' <br>';
-            }
+            const status = state.open ? 'doors open :D' : 'closed';
+            openHtml = `space: ${status}, as of ${rtf.format(elapsed[0], elapsed[1])} `;
         }
 
-        var tempHtml = '';
+        var tempHtml = openHtml ? '<br>' : '';
         if (sensors && sensors.temperature && sensors.temperature.length > 0) {
             const temp = Math.round(sensors.temperature[0].value);
             const unit = sensors.temperature[0].unit;
-            tempHtml = 'temp: ' + temp + unit + ' inside'
+            tempHtml = tempHtml + 'temp: ' + temp + unit + ' inside'
         }
 
         targetElement.innerHTML = '<p>' + openHtml + tempHtml + '</p>';
