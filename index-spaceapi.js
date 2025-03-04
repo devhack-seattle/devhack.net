@@ -31,9 +31,9 @@ async function doSpaceapi(url, targetElementId) {
             const unit = Math.abs(elapsed) < 3600 ? 'minutes' : 'hours';
             const elapsedInUnit = Math.round(Math.abs(elapsed) < 3600 ? elapsed / 60 : elapsed / 3600);
             if (state.open) {
-                openHtml = 'someone might be at the space (as of ' + rtf.format(elapsedInUnit, unit) + ') :D <br>';
+                openHtml = 'space: doors open, as of ' + rtf.format(elapsedInUnit, unit) + ' :D <br>';
             } else {
-                openHtml = 'the space is probably closed (as of ' + rtf.format(elapsedInUnit, unit) + ') <br>';
+                openHtml = 'space: closed, as of ' + rtf.format(elapsedInUnit, unit) + ' <br>';
             }
         }
 
@@ -41,7 +41,7 @@ async function doSpaceapi(url, targetElementId) {
         if (sensors && sensors.temperature && sensors.temperature.length > 0) {
             const temp = Math.round(sensors.temperature[0].value);
             const unit = sensors.temperature[0].unit;
-            tempHtml = 'it is ' + temp + unit + ' inside'
+            tempHtml = 'temp: ' + temp + unit + ' inside'
         }
 
         targetElement.innerHTML = '<p>' + openHtml + tempHtml + '</p>';
