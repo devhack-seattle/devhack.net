@@ -14,6 +14,18 @@ function escape(str) {
     });
 }
 
+/* figures out what unit a time value should be displayed in, then returns the value in that unit and the name of that unit */
+function secondsToValueInUnit(seconds) {
+    const absSeconds = Math.abs(seconds);
+    if (absSeconds < 3600) {
+        return [Math.round(seconds / 60), 'minutes'];
+    }
+    if (absSeconds < 86400) {
+        return [Math.round(seconds / 3600), 'hours'];
+    }
+    return [Math.round(seconds / 86400), 'days'];
+}
+
 // Main function :)
 async function doSpaceapi(url, targetElementId) {
     const targetElement = document.getElementById(targetElementId);
@@ -27,13 +39,11 @@ async function doSpaceapi(url, targetElementId) {
         var openHtml = '';
         if (state && state.lastchange && typeof state.open !== 'undefined') {
             const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
-            const elapsed = state.lastchange - Date.now() / 1000.0;
-            const unit = Math.abs(elapsed) < 3600 ? 'minutes' : 'hours';
-            const elapsedInUnit = Math.round(Math.abs(elapsed) < 3600 ? elapsed / 60 : elapsed / 3600);
+            const elapsed = secondsToValueInUnit(state.lastchange - (Date.now() / 1000.0));
             if (state.open) {
-                openHtml = 'space: doors open, as of ' + rtf.format(elapsedInUnit, unit) + ' :D <br>';
+                openHtml = 'space: doors open, as of ' + rtf.format(elapsed[0], elapsed[1]) + ' :D <br>';
             } else {
-                openHtml = 'space: closed, as of ' + rtf.format(elapsedInUnit, unit) + ' <br>';
+                openHtml = 'space: closed, as of ' + rtf.format(elapsed[0], elapsed[1]) + ' <br>';
             }
         }
 
