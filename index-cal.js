@@ -19,7 +19,7 @@ function escape(str) {
 async function fetchCalendar(url) {
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error(`Failed to fetch calendar: ${response.status} ${response.statusText}`);
+        throw new Error(`naurrrr :( failed to fetch calendar: ${response.status} ${response.statusText}`);
     }
     const icsData = await response.text();
     const jcalData = ICAL.parse(icsData);

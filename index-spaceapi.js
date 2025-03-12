@@ -31,7 +31,17 @@ async function doSpaceapi(url, targetElementId) {
     const targetElement = document.getElementById(targetElementId);
 
     try {
-        const spaceapi = await (await fetch(url)).json();
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('oh naur, spaceapi borked! http: ' + response.status);
+        }
+        let spaceapi;
+        try {
+            spaceapi = await response.json();
+        } catch (jsonError) {
+            throw new Error('oh naur, bad json? ' + jsonError.message);
+        }
+
         console.log(spaceapi);
         const state = spaceapi["state"];
         const sensors = spaceapi["sensors"];
