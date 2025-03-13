@@ -94,7 +94,7 @@ img {
     align-content: center;
     margin: auto;
     display: inline-block;
-    filter: grayscale(20%);
+    filter: grayscale(30%);
 }
 
 img:hover {
