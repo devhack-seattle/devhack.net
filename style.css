@@ -25,17 +25,11 @@ li {
 /* Mobile devices get slightly smaller margins, so that we actually have room
  * for text.
  */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 749px) {
     body {
         margin: 50px 5% 5% 5%;
     }
 
-    .holder {
-        width: 45%;
-    }
-}
-
-@media only screen and (max-width: 749px) {
     .holder {
         width: 35%;
     }
@@ -107,11 +101,33 @@ img:hover {
     filter: grayscale(0%);
 }
 
-.imgholder {
-    text-align: center;
+.grid-container {
+    margin: 1em auto;
 }
 
-.guysholder>h1 {
-    margin-top: 5px;
-    margin-bottom: 145px;
+.grid-container {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.imgholder {
+    width: 100%;
+    overflow: hidden;
+}
+
+.imgholder img {
+    width: 100%;
+    height: auto;
+}
+
+.guysholder p {
+    margin-top: 2em;
 }
