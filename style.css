@@ -57,6 +57,26 @@ h1,
     margin: 40px 0px;
 }
 
+h1 {
+    animation: headerGlow 4s infinite ease-in-out;
+    text-shadow: 0 0 5px lime, 0 0 10px lime;
+}
+
+@keyframes headerGlow {
+    0% { 
+        opacity: 0.9; 
+        text-shadow: 0 0 3px lime, 0 0 7px lime;
+    }
+    50% { 
+        opacity: 1; 
+        text-shadow: 0 0 8px lime, 0 0 10px lime;
+    }
+    100% { 
+        opacity: 0.9; 
+        text-shadow: 0 0 3px lime, 0 0 7px lime;
+    }
+}
+
 p {
     margin: 0.5em 0;
 }
