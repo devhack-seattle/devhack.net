@@ -16,6 +16,24 @@ function escape(str) {
     });
 }
 
+function linkAndEscape(str) {
+    if (!str) return '';
+    
+    const escaped = str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+    
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    
+    return escaped.replace(urlRegex, (url) => {
+    const safeUrl = encodeURI(url);
+      return `<a href="${safeUrl}" target="_blank">${safeUrl}</a>`;
+    });
+  }
+
 async function fetchCalendar(url) {
     const response = await fetch(url);
     if (!response.ok) {
@@ -43,7 +61,7 @@ function drawEventList(events) {
         const li = document.createElement('li');
         const dateStr = `${event.start.toLocaleDateString('en-US', dateOptions)}`.toLocaleLowerCase();
         const timeStr = `${event.start.toLocaleTimeString('en-US', timeOptions)} - ${event.end.toLocaleTimeString('en-US', timeOptions)}`.toLocaleLowerCase();
-        const descriptionStr = event.description ? `<br>${escape(event.description)}` : '';
+        const descriptionStr = event.description ? `<br>${linkAndEscape(event.description)}` : '';
         const recurrence = event.recurrence ? `${event.recurrence}<br>`.toLocaleLowerCase() : '';
         li.innerHTML = `${escape(event.summary)}<span class="secondary">${descriptionStr}<br>${recurrence}${dateStr}<br>${timeStr}</span>`;
         ul.appendChild(li);
