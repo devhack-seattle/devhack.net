@@ -50,7 +50,7 @@ async function doSpaceapi(url, targetElementId) {
         if (state && state.lastchange && typeof state.open !== 'undefined') {
             const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
             const elapsed = secondsToValueInUnit(state.lastchange - (Date.now() / 1000.0));
-            const status = state.open ? 'doors open!' : 'closed,';
+            const status = state.open ? '<a href="https://wiki.devhack.net/Entering_The_Space#Kinds_of_%22Open%22" target="_blank">doors open</a>!' : 'closed,';
             openHtml = `space: ${status} as of ${rtf.format(elapsed[0], elapsed[1])} `;
         }
 
