@@ -33,13 +33,13 @@ async function doSpaceapi(url, targetElementId) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('oh naur, spaceapi borked! http: ' + response.status);
+            throw new Error('spaceapi borked! http: ' + response.status);
         }
         let spaceapi;
         try {
             spaceapi = await response.json();
         } catch (jsonError) {
-            throw new Error('oh naur, bad json? ' + jsonError.message);
+            throw new Error('bad json? ' + jsonError.message);
         }
 
         console.log(spaceapi);
@@ -55,7 +55,7 @@ async function doSpaceapi(url, targetElementId) {
         }
 
         var tempHtml = openHtml ? '<br>' : '';
-        if (sensors && sensors.temperature && sensors.temperature.length > 0) {
+        if (sensors && sensors.temperature && sensors.temperature[0] && sensors.temperature[0].value) {
             const temp = Math.round(sensors.temperature[0].value);
             const unit = sensors.temperature[0].unit;
             tempHtml = tempHtml + 'temp: ' + temp + unit + ' inside'
@@ -64,7 +64,7 @@ async function doSpaceapi(url, targetElementId) {
         targetElement.innerHTML = '<p>' + openHtml + tempHtml + '</p>';
     }
     catch (error) {
-        targetElement.innerHTML = '<p>Sorry - couldn\'t load the spaceapi :(</p> <small>' + error + '</small>';
+        targetElement.innerHTML = '<p>Oh naur - couldn\'t load the spaceapi :(</p> <small>' + error + '<br>This incident will be reported.</small>';
     }
 }
 doSpaceapi(spaceapiUrl, 'spaceapi-body');

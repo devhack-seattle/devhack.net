@@ -18,26 +18,26 @@ function escape(str) {
 
 function linkAndEscape(str) {
     if (!str) return '';
-    
+
     const escaped = str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;');
-    
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+
     const urlRegex = /(https?:\/\/[^\s]+)/g;
-    
+
     return escaped.replace(urlRegex, (url) => {
-    const safeUrl = encodeURI(url);
-      return `<a href="${safeUrl}" target="_blank">${safeUrl}</a>`;
+        const safeUrl = encodeURI(url);
+        return `<a href="${safeUrl}" target="_blank">${safeUrl}</a>`;
     });
-  }
+}
 
 async function fetchCalendar(url) {
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error(`naurrrr :( failed to fetch calendar: ${response.status} ${response.statusText}`);
+        throw new Error(`heck! failed to fetch calendar: ${response.status} ${response.statusText}`);
     }
     const icsData = await response.text();
     const jcalData = ICAL.parse(icsData);
@@ -100,7 +100,7 @@ function getUpcomingEvents(vcalendar, numEvents = 10) {
             if (titlesSeen.has(icalEvent.summary)) {
                 return;
             }
-        
+
             const expand = icalEvent.iterator();
             let next;
 
@@ -155,7 +155,7 @@ async function doCalendar(calendarUrl, targetElementId) {
         targetElement.appendChild(eventList);
     }
     catch (error) {
-        targetElement.innerHTML = '<p>Sorry - couldn\'t load the calendar :(</p> <small>' + error + '</small>';
+        targetElement.innerHTML = '<p>Oh naur - couldn\'t load the calendar :(</p> <small>' + error + '<br>This incident will be reported.</small>';
     }
 }
 doCalendar(icsUrl, 'cal-parsed');
