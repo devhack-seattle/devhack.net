@@ -11,6 +11,7 @@
 <script src="vendor/polyfill.min.js"></script>
 <script defer src="index-cal.js"></script>
 <script defer src="index-spaceapi.js"></script>
+<script defer src="index-newsfeed.js" type="module"></script>
 
 <body>
 
@@ -30,19 +31,58 @@
                <a href="https://wiki.devhack.net/Accessibility">accessibility</a>
           </span>
      </p>
+
      <h2 id="status">status <span class="small">(<a href="https://mapall.space/heatmap/show.php?id=/dev/hack">stats</a>,
                <a href="/spaceapi.json">spaceapi</a>)</span></h2>
      <div id="spaceapi-body">
           <ul>
+               <li>loading... (do you have javascript?)</li>
+          </ul>
+     </div>
+
+     <h2>
+          what's new
+          <span class="small">(<a href="https://members.devhack.net/news/feed.json">json</a>)</span>
+     </h2>
+     <div id="news-feed">
+          <div id="news-feed-gradient" class="overlay"></div>
+          <div id="news-feed-controls" class="overlay">
+               <button id="news-feed-right" aria-label="next news item">
+                    <svg width="24px" height="24px">
+                         <use href="/assets/arrow_forward_ios.svg#img"></use>
+                    </svg>
+               </button>
+          </div>
+          <ul id="news-list">
                <li>loading... (do you have JavaScript?)</li>
           </ul>
      </div>
+     <template id="news-item-template">
+          <li class="news-item">
+               <header class="news-author">
+                    <img class="news-avatar" />
+                    <p>
+                         <span class="news-username"></span>
+                         <time class="news-created-time"></time>
+                    </p>
+               </header>
+               <p class="news-body">
+                    <span class="news-content"></span>
+                    <a class="news-trac-ticket-id"></a>
+               </p>
+               <a class="news-thumbnail-link" role="button">
+                    <img class="news-thumbnail-image" />
+               </a>
+          </li>
+     </template>
+
      <h2 id="calendar">calendar <span class="small">(<a href="/calendar.ics">ics</a>)</span></h2>
      <div id="cal-parsed">
           <ul>
                <li>loading... (do you have JavaScript?)</li>
           </ul>
      </div>
+
      <h2 id="contact">contact</h2>
      <ul>
           <!-- use HTML entities to obfuscate email address -->
@@ -62,5 +102,16 @@
           <li>payphone: <a href="tel:+15648887373">+1 (564) 888-7373</a>
           </li>
      </ul>
+
+     <template id="error-template">
+          <div class="error">
+               <p>Oh naur - couldn't load the <span data-slot="thing"></span> :(</p>
+               <small>
+                    Error: <span data-slot="message"></span>
+                    <br />
+                    This incident will be reported.
+               </small>
+          </div>
+     </template>
 
 </html>
