@@ -150,7 +150,7 @@ function createdAtString(createdAt) {
   const now = Date.now();
   const createdAtDate = Date.parse(createdAt);
 
-  const day = Math.floor((createdAtDate - now) / (1000 * 60 * 60 * 24));
+  const day = Math.round((createdAtDate - now) / (1000 * 60 * 60 * 24));
   return timeAgoFormatter.format(day, "day");
 }
 
