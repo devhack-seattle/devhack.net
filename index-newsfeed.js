@@ -126,7 +126,7 @@ function createNewsItem({
     `https://members.devhack.net/user/avatar/${username}`;
   elem(newsItem, ".news-created-time", createdAtString(createdAt));
   elem(newsItem, ".news-created-time").datetime = createdAt;
-  elem(newsItem, ".news-content", content);
+  elem(newsItem, ".news-content", linkAndEscape(content), true);
 
   if (thumbnailURL) {
     elem(newsItem, ".news-thumbnail-link").href = thumbnailURL;
@@ -154,15 +154,20 @@ function createdAtString(createdAt) {
   return timeAgoFormatter.format(day, "day");
 }
 
-function elem(parent, query, value = undefined) {
-  const elem = parent.querySelector(query);
-  if (!elem) {
+function elem(parent, query, value = undefined, unsafeHtml = false) {
+  const element = parent.querySelector(query);
+  if (!element) {
     throw new Error(`Element not found for query: ${query}`);
   }
+
   if (value !== undefined) {
-    elem.textContent = value;
+    if (unsafeHtml) {
+      element.innerHTML = value;
+    } else {
+      element.textContent = value;
+    }
   } else {
-    return elem;
+    return element;
   }
 }
 
