@@ -307,3 +307,21 @@ img:hover {
         }
     }
 }
+
+footer {
+    margin-top: 5em;
+    font-size: 1rem;
+    text-align: right;
+    max-width: 60%;
+    margin-left: auto;
+}
+
+.footer-logo {
+    height: 1em;
+    width: auto;
+    vertical-align: middle;
+    margin-left: 0.25em;
+    /* Override rendering for logos */
+    image-rendering: auto;
+    filter: none;
+}
