@@ -1,34 +1,35 @@
-https://fahrplan.events.ccc.de/congress/2007/Fahrplan/attachments/1003_Building%20a%20Hacker%20Space.pdf
+# devhack.net
 
-hackerbot labs seemed to be the closest thing to a seattle hackerspace
+> It's called devhack dot net because the devhack is on the net.
 
-pdx hackerspace is *very* cool and I want to visit sometime.
+This is the official website for /dev/hack, a hackerspace in Seattle.
 
-
-https://www.loopnet.com/search/office-space/seattle-wa/for-lease/?sk=50d7d36bf2f66fbcbac3baa5bf968fbf&bb=o4mp25jrtQh1x3H
-
-
-office spaces aren't actually too expensive.
-
-seattle hacker spaces are a thing?
+Contributions are welcome. The canonical repository for this project is at
+https://git.devhack.net/devhack/devhack.net.
 
 
+## Development
 
-step 1: garner/gauge interest
-step 2: obligate some people into being in charge with me / starting it together & splitting the costs
-step 3: find a space
-step 4: move in
-step 5: make it cool
+To get started with developing the website:
 
+1.  Clone this repository.
+2.  Open `index.html` in your web browser to view the site, or better yet, use
+    one of the ad-hoc live reload tools like Visual Studio Code's Live Server
+    extension.
+3.  Make the desired changes to:
+    * `index.html`, `more.html`: Body copy for the main pages.
+    * `index-cal.js`: Handles the calendar functionality.
+    * `index-newsfeed.js`: Manages the news feed.
+    * `index-spaceapi.js`: Deals with the SpaceAPI integration.
+    * `index-common.js`: Contains shared utility functions.
 
+For local development, you may want to download local copies of the data files
+that the site uses. In production, they are reverse proxied from their
+respective origins, and so they do not exist in git:
 
-things the hackerspace has:
-seedbox
-server shit
-router
-VR headset
-old computers
-projector setup
-big ol UPS
-
-/dev/hack
+```sh
+# in the root of the repository, run:
+curl -o calendar.ics https://devhack.net/calendar.ics
+curl -o spaceapi.json https://devhack.net/spaceapi.json
+curl -o news.json https://devhack.net/news.json
+```
