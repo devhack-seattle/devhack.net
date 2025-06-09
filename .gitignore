@@ -2,4 +2,5 @@
 # file is made available at the same path by reverse proxy.
 calendar.ics
 spaceapi.json
+news.json
 .DS_Store
