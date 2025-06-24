@@ -310,7 +310,7 @@ img:hover {
 
 footer {
     margin-top: 5em;
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: right;
     max-width: 60%;
     margin-left: auto;
@@ -323,5 +323,5 @@ footer {
     margin-left: 0.25em;
     /* Override rendering for logos */
     image-rendering: auto;
-    filter: none;
+    filter: brightness(50%);
 }
