@@ -323,5 +323,4 @@ footer {
     margin-left: 0.25em;
     /* Override rendering for logos */
     image-rendering: auto;
-    filter: brightness(50%);
 }
