@@ -76,11 +76,11 @@ async function fetchNewsFeed(afterID = null) {
     );
 
     const feed = await response.json();
-    // feed = [...feed, ...feed, ...feed, ...feed];
     const newsItems = feed.map((item) =>
       createNewsItem({
         id: item.id,
         createdAt: item.created_at,
+        editedAt: item.edited_at,
         username: item.author.username,
         content: item.content,
         thumbnailURL: item.thumbnail_url,
@@ -111,6 +111,7 @@ function createError({ message }) {
 function createNewsItem({
   id,
   createdAt,
+  editedAt,
   username,
   content,
   thumbnailURL,
@@ -124,9 +125,17 @@ function createNewsItem({
   elem(newsItem, ".news-avatar").alt = `${username}'s avatar`;
   elem(newsItem, ".news-avatar").src =
     `https://members.devhack.net/user/avatar/${username}`;
-  elem(newsItem, ".news-created-time", createdAtString(createdAt));
-  elem(newsItem, ".news-created-time").datetime = createdAt;
+  elem(newsItem, ".news-created-time", createdAgoString(createdAt));
+  elem(newsItem, ".news-created-time").dateTime = createdAt;
+  elem(newsItem, ".news-created-time").title = createdAtTimestamp(createdAt);
   elem(newsItem, ".news-content", linkAndEscape(content), true);
+
+  if (editedAt) {
+    elem(newsItem, ".news-edited").title = createdAtTimestamp(editedAt);
+  } else {
+    elem(newsItem, ".news-edited").setAttribute("hidden", "");
+    elem(newsItem, ".news-edited").setAttribute("aria-hidden", "true");
+  }
 
   if (thumbnailURL) {
     elem(newsItem, ".news-thumbnail-link").href = thumbnailURL;
@@ -146,15 +155,40 @@ function createNewsItem({
   return newsItem;
 }
 
-function createdAtString(createdAt) {
-  const now = Date.now();
-  const createdAtDate = Date.parse(createdAt);
+function createdAgoString(createdAt) {
+  /** @type {[function(Date): number, Intl.RelativeTimeFormatUnit][]} */
+  const getters = [
+    [(d) => d.getFullYear(), "year"],
+    [(d) => d.getMonth(), "month"],
+    [(d) => d.getDate(), "day"],
+    [(d) => Math.floor((d - now) / (1000 * 60 * 60)), "hour"],
+  ];
 
-  const day = Math.round((createdAtDate - now) / (1000 * 60 * 60 * 24));
-  return timeAgoFormatter.format(day, "day");
+  const now = new Date();
+  const createdAtDate = new Date(Date.parse(createdAt));
+
+  for (const [i, [getter, unit]] of getters.entries()) {
+    const d = getter(createdAtDate) - getter(now);
+    if (d != 0 || i == getters.length - 1) {
+      return timeAgoFormatter.format(d, unit);
+    }
+  }
+}
+
+function createdAtTimestamp(createdAt) {
+  const createdAtDate = new Date(Date.parse(createdAt));
+  return createdAtDate.toLocaleString(undefined, {
+    weekday: "long",
+    month: "numeric",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  });
 }
 
 function elem(parent, query, value = undefined, unsafeHtml = false) {
+  /** @type {HTMLElement} */
   const element = parent.querySelector(query);
   if (!element) {
     throw new Error(`Element not found for query: ${query}`);

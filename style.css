@@ -20,7 +20,10 @@ li {
 
 .holder {
     width: 60%;
+}
 
+[hidden] {
+    display: none !important;
 }
 
 
@@ -264,8 +267,6 @@ img:hover {
             gap: 0.5rem;
 
             p {
-                display: flex;
-                flex-direction: column;
                 margin: 0;
             }
         }
@@ -280,6 +281,11 @@ img:hover {
 
         .news-username {
             font-weight: bold;
+        }
+
+        .news-edited {
+            font-size: 0.75em;
+            display: inline;
         }
 
         .news-body {
