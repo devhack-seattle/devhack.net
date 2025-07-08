@@ -67,13 +67,10 @@ async function fetchNewsFeed(afterID = null) {
 
   try {
     const query = afterID ? `?after=${afterID}` : "";
-    const response = await fetch(
-      `https://members.devhack.net/news/feed.json?${query}`,
-      {
-        headers: { "Accept": "application/json" },
-        credentials: "omit",
-      },
-    );
+    const response = await fetch(`/news.json?${query}`, {
+      headers: { "Accept": "application/json" },
+      credentials: "omit",
+    });
 
     const feed = await response.json();
     const newsItems = feed.map((item) =>

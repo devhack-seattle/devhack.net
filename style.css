@@ -80,6 +80,14 @@ h1 {
     }
 }
 
+h2 .small {
+    display: inline-flex;
+
+    a:not(:first-child) {
+        margin-left: 0.25em;
+    }
+}
+
 p {
     margin: 0.5em 0;
 }
