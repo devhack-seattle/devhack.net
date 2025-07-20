@@ -29,7 +29,7 @@ respective origins, and so they do not exist in git:
 
 ```sh
 # in the root of the repository, run:
-curl -o calendar.ics https://devhack.net/calendar.ics
-curl -o spaceapi.json https://devhack.net/spaceapi.json
-curl -o news.json https://devhack.net/news.json
+curl -Lo calendar.ics https://devhack.net/calendar.ics
+curl -Lo spaceapi.json https://devhack.net/spaceapi.json
+curl -Lo news.json https://devhack.net/news.json
 ```

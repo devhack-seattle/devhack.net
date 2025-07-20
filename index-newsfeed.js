@@ -81,6 +81,7 @@ async function fetchNewsFeed(afterID = null) {
         username: item.author.username,
         content: item.content,
         thumbnailURL: item.thumbnail_url,
+        thumbnailURLSmall: item.thumbnail_url_small,
         tracTicketID: item.trac_ticket_id,
       })
     );
@@ -112,6 +113,7 @@ function createNewsItem({
   username,
   content,
   thumbnailURL,
+  thumbnailURLSmall,
   tracTicketID,
 }) {
   const newsItem = newsItemTemplate.content.firstElementChild.cloneNode(true);
@@ -138,7 +140,8 @@ function createNewsItem({
     elem(newsItem, ".news-thumbnail-link").href = thumbnailURL;
     elem(newsItem, ".news-thumbnail-link").target = "_blank";
 
-    elem(newsItem, ".news-thumbnail-image").src = thumbnailURL;
+    elem(newsItem, ".news-thumbnail-image").src = thumbnailURLSmall ??
+      thumbnailURL;
     elem(newsItem, ".news-thumbnail-image").alt = `thumbnail image for post`;
   }
 
