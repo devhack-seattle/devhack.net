@@ -156,23 +156,28 @@ function createNewsItem({
 }
 
 function createdAgoString(createdAt) {
-  /** @type {[function(Date): number, Intl.RelativeTimeFormatUnit][]} */
-  const getters = [
-    [(d) => d.getFullYear(), "year"],
-    [(d) => d.getMonth(), "month"],
-    [(d) => d.getDate(), "day"],
-    [(d) => Math.floor((d - now) / (1000 * 60 * 60)), "hour"],
-  ];
-
   const now = new Date();
   const createdAtDate = new Date(Date.parse(createdAt));
-
-  for (const [i, [getter, unit]] of getters.entries()) {
-    const d = getter(createdAtDate) - getter(now);
-    if (d != 0 || i == getters.length - 1) {
-      return timeAgoFormatter.format(d, unit);
-    }
+  const diffMs = createdAtDate - now; // Negative for past dates
+  
+  // Convert to various time units. The following calculates are just heuristics
+  // and are not accurate for all months/years. This is fine because it is just
+  // a human-readable approximation.
+  const diffHours = diffMs / (1000 * 60 * 60);
+  const diffDays = diffHours / 24;
+  const diffMonths = diffDays / 30;
+  const diffYears = diffDays / 365;
+  
+  if (Math.abs(diffYears) >= 1) {
+    return timeAgoFormatter.format(Math.round(diffYears), "year");
   }
+  if (Math.abs(diffMonths) >= 1) {
+    return timeAgoFormatter.format(Math.round(diffMonths), "month");
+  }
+  if (Math.abs(diffDays) >= 1) {
+    return timeAgoFormatter.format(Math.round(diffDays), "day");
+  }
+  return timeAgoFormatter.format(Math.round(diffHours), "hour");
 }
 
 function createdAtTimestamp(createdAt) {
