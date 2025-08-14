@@ -18,6 +18,20 @@ li {
     margin-top: 0.5em;
 }
 
+dl {
+    margin: 0;
+    margin-block: 1em;
+    padding-inline-start: 40px;
+}
+
+dd {
+    margin-bottom: 0.5em;
+}
+
+dt {
+    margin-top: 0.5em;
+}
+
 .holder {
     width: 60%;
 }
@@ -66,16 +80,18 @@ h1 {
 }
 
 @keyframes headerGlow {
-    0% { 
-        opacity: 0.9; 
+    0% {
+        opacity: 0.9;
         text-shadow: 0 0 3px lime, 0 0 7px lime;
     }
-    50% { 
-        opacity: 1; 
+
+    50% {
+        opacity: 1;
         text-shadow: 0 0 8px lime, 0 0 10px lime;
     }
-    100% { 
-        opacity: 0.9; 
+
+    100% {
+        opacity: 0.9;
         text-shadow: 0 0 3px lime, 0 0 7px lime;
     }
 }
@@ -181,13 +197,11 @@ img:hover {
     }
 
     #news-feed-gradient {
-        background: linear-gradient(
-            to left,
-            rgba(0, 0, 0, 1) 0,
-            rgba(0, 0, 0, 0.8) 42px,
-            transparent 100px,
-            transparent 100%
-        );
+        background: linear-gradient(to left,
+                rgba(0, 0, 0, 1) 0,
+                rgba(0, 0, 0, 0.8) 42px,
+                transparent 100px,
+                transparent 100%);
     }
 
     #news-feed-controls {
@@ -247,7 +261,8 @@ img:hover {
     list-style: none;
 
     padding: 0;
-    padding-right: 100px; /* space for gradient */
+    padding-right: 100px;
+    /* space for gradient */
     margin: 0;
 
     font-size: 0.85em;
