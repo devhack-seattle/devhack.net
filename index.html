@@ -124,11 +124,10 @@
 
      <template id="error-template">
           <div class="error">
-               <p>Oh naur - couldn't load the <span data-slot="thing"></span> :(</p>
+               <strong>issue loading <span data-slot="thing"></span></strong>
                <small>
-                    Error: <span data-slot="message"></span>
+                    <span data-slot="message"></span>
                     <br />
-                    This incident will be reported.
                </small>
           </div>
      </template>

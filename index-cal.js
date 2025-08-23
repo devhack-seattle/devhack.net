@@ -155,7 +155,12 @@ async function doCalendar(calendarUrl, targetElementId) {
         targetElement.appendChild(eventList);
     }
     catch (error) {
-        targetElement.innerHTML = '<p>Oh naur - couldn\'t load the calendar :(</p> <small>' + error + '<br>This incident will be reported.</small>';
+        console.error("Error fetching calendar:", error);
+        targetElement.innerHTML = '';
+        targetElement.appendChild(createError({
+            thing: "calendar",
+            message: error.toString()
+        }));
     }
 }
 doCalendar(icsUrl, 'cal-parsed');

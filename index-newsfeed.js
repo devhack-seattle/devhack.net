@@ -7,9 +7,6 @@ const newsFeedRight = document.getElementById("news-feed-right");
 /** @type {HTMLTemplateElement} */
 const newsItemTemplate = document.getElementById("news-item-template");
 
-/** @type {HTMLTemplateElement} */
-const errorTemplate = document.getElementById("error-template");
-
 const timeAgoFormatter = new Intl.RelativeTimeFormat(undefined, {
   style: "short",
   numeric: "auto",
@@ -93,17 +90,12 @@ async function fetchNewsFeed(afterID = null) {
   } catch (err) {
     console.error("Error fetching news feed:", err);
 
-    newsFeed.append(createError({ message: `${err}` }));
+    newsFeed.append(createError({
+      thing: "news feed",
+      message: `${err}`
+    }));
     newsFeed.dataset.error = true;
   }
-}
-
-function createError({ message }) {
-  const errorElement = errorTemplate.content.firstElementChild.cloneNode(true);
-  elem(errorElement, `[data-slot="thing"]`, "news feed");
-  elem(errorElement, `[data-slot="message"]`, message);
-
-  return errorElement;
 }
 
 function createNewsItem({
@@ -159,7 +151,7 @@ function createdAgoString(createdAt) {
   const now = new Date();
   const createdAtDate = new Date(Date.parse(createdAt));
   const diffMs = createdAtDate - now; // Negative for past dates
-  
+
   // Convert to various time units. The following calculates are just heuristics
   // and are not accurate for all months/years. This is fine because it is just
   // a human-readable approximation.
@@ -167,7 +159,7 @@ function createdAgoString(createdAt) {
   const diffDays = diffHours / 24;
   const diffMonths = diffDays / 30;
   const diffYears = diffDays / 365;
-  
+
   if (Math.abs(diffYears) >= 1) {
     return timeAgoFormatter.format(Math.round(diffYears), "year");
   }
@@ -192,22 +184,5 @@ function createdAtTimestamp(createdAt) {
   });
 }
 
-function elem(parent, query, value = undefined, unsafeHtml = false) {
-  /** @type {HTMLElement} */
-  const element = parent.querySelector(query);
-  if (!element) {
-    throw new Error(`Element not found for query: ${query}`);
-  }
-
-  if (value !== undefined) {
-    if (unsafeHtml) {
-      element.innerHTML = value;
-    } else {
-      element.textContent = value;
-    }
-  } else {
-    return element;
-  }
-}
 
 main();

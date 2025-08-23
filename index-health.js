@@ -17,7 +17,7 @@
     try {
         const isDown = await areWeLosing();
         if (isDown) {
-            el.innerHTML = 'oh naur! some space services are currently unreachable, so not all web interactions might work. to get help or report this incident, <a href="#contact">contact us</a>.';
+            el.innerHTML = '<strong>oh naur!</strong> some space services are currently down, so not all web interactions might work. to report this incident, <a href="#contact">contact us</a>.';
             el.hidden = false;
         } else {
             el.hidden = true;

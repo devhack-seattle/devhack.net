@@ -1,5 +1,6 @@
 const spaceapiUrl = '/spaceapi.json';
 
+
 function escape(str) {
     return str.replace(/[&<>"'/]/g, function (char) {
         const escapeMap = {
@@ -64,7 +65,12 @@ async function doSpaceapi(url, targetElementId) {
         targetElement.innerHTML = '<p>' + openHtml + tempHtml + '</p>';
     }
     catch (error) {
-        targetElement.innerHTML = '<p>Oh naur - couldn\'t load the spaceapi :(</p> <small>' + error + '<br>This incident will be reported.</small>';
+        console.error("Error fetching spaceapi:", error);
+        targetElement.innerHTML = '';
+        targetElement.appendChild(createError({
+            thing: "spaceapi",
+            message: error.toString()
+        }));
     }
 }
 doSpaceapi(spaceapiUrl, 'spaceapi-body');
