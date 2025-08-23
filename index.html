@@ -14,6 +14,7 @@
 <script defer src="index-cal.js"></script>
 <script defer src="index-spaceapi.js"></script>
 <script defer src="index-newsfeed.js" type="module"></script>
+<script defer src="index-health.js"></script>
 
 <body>
 
@@ -36,6 +37,8 @@
 
      <h2 id="status">status <span class="small">(<a href="https://mapall.space/heatmap/show.php?id=/dev/hack">stats</a>,
                <a href="/spaceapi.json">spaceapi.json</a>)</span></h2>
+     <div id="service-warning" class="error" hidden role="alert"></div>
+
      <div id="spaceapi-body">
           <ul>
                <li>loading... (do you have javascript?)</li>

@@ -353,3 +353,12 @@ footer {
     /* Override rendering for logos */
     image-rendering: auto;
 }
+
+.error {
+    border: 1px solid;
+    padding: .75em 1em;
+    margin: 1em 0;
+    border-radius: 10px;
+    font-size: 0.9em;
+    max-width: 50%;
+}
