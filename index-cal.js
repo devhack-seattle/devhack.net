@@ -37,7 +37,7 @@ function linkAndEscape(str) {
 async function fetchCalendar(url) {
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error(`heck! failed to fetch calendar: ${response.status} ${response.statusText}`);
+        throw new Error(`http: ${response.status} ${response.statusText}`);
     }
     const icsData = await response.text();
     const jcalData = ICAL.parse(icsData);

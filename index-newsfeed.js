@@ -69,6 +69,10 @@ async function fetchNewsFeed(afterID = null) {
       credentials: "omit",
     });
 
+    if (!response.ok) {
+      throw new Error(`http: ${response.status} ${response.statusText}`);
+    }
+
     const feed = await response.json();
     const newsItems = feed.map((item) =>
       createNewsItem({

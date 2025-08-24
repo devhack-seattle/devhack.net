@@ -34,8 +34,9 @@ async function doSpaceapi(url, targetElementId) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('http: ' + response.status);
+            throw new Error(`http: ${response.status} ${response.statusText}`);
         }
+
         let spaceapi;
         try {
             spaceapi = await response.json();
