@@ -34,7 +34,7 @@ async function doSpaceapi(url, targetElementId) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('spaceapi borked! http: ' + response.status);
+            throw new Error('http: ' + response.status);
         }
         let spaceapi;
         try {
