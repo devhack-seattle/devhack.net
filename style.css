@@ -41,19 +41,6 @@ dt {
 }
 
 
-/* Mobile devices get slightly smaller margins, so that we actually have room
- * for text.
- */
-@media only screen and (max-width: 749px) {
-    body {
-        margin: 50px 5% 5% 5%;
-    }
-
-    .holder {
-        width: 35%;
-    }
-}
-
 .secondary {
     color: #00b300;
 }
@@ -361,4 +348,21 @@ footer {
     border-radius: 10px;
     font-size: 0.9em;
     max-width: 50%;
+}
+
+/* Mobile devices get slightly smaller margins, so that we actually have room
+ * for text.
+ */
+@media only screen and (max-width: 749px) {
+    body {
+        margin: 50px 5% 5% 5%;
+    }
+
+    .holder {
+        width: 35%;
+    }
+
+    .error {
+        max-width: 80%;
+    }
 }
