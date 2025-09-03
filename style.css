@@ -351,6 +351,11 @@ footer {
     max-width: 50%;
 }
 
+blockquote {
+  padding-left: 10px;
+  border-left: 2px solid;
+}
+
 /* Mobile devices get slightly smaller margins, so that we actually have room
  * for text.
  */
