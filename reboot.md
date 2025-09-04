@@ -7,12 +7,6 @@ description-meta: 'devhack needs your help'
 
 Due to [recent events](./lore/schism.html) the /dev/hack hackerspace has run into, we need help re-setting up the space!
 
----
-
-<small>heads up, our services are down so a lot of links in here might not work!</small>
-
----
-
 Specifically, we need, in order of importance:
 
 - [giveafuck](https://wiki.devhack.net/Giveafuck)
