@@ -1,0 +1,27 @@
+@import "../style.css";
+p {
+    margin: 1.5em 0.5em;
+}
+
+small{
+    margin-top:1em;
+    margin-left:1.5em;
+}
+
+h1{
+    margin-bottom: 5px;
+}
+
+hr{
+    margin-top: 3em;
+    margin-bottom: 3em;
+     display:none;
+}
+
+p:nth-child(4){
+    margin-top:2.5em;
+}
+
+body{
+    line-height: 1.2;
+}

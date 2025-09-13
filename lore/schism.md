@@ -34,13 +34,13 @@ premises and hold an informal discussion at a park a few blocks away.
 
 During the blockade, this person was repeatedly asked to leave by devhack
 membership while both they and their supporters recited washington state law,
-questioned the space's insurance status, injured themselves and claimed they
-needed entry to the space for first aid, furled insults at devhack leadership
-and their supporters, and generally were just very loud and did quite a lot of
-emotional damage to those blockading the entrance and observers to these
-events. They also threatened to get in contact with devhack business partners
-to complain about our conduct throughout these events in an attempt to tarnish
-devhack's business relationships.
+questioned the space's insurance status, unintentionally injured themselves and
+claimed they needed entry to the space for first aid, furled insults at devhack
+leadership and their supporters, and generally were just very loud and did
+quite a lot of emotional damage to those blockading the entrance and observers
+to these events. They also threatened to get in contact with devhack business
+partners to complain about our conduct throughout these events in an attempt to
+tarnish devhack's business relationships.
 
 ## Consequences
 
@@ -57,9 +57,9 @@ counsel.
 These banned members have been invited to rightfully reclaim their personal
 equipment hosted at the space in a supervised fashion, alongside other
 members who have chosen to bow out. 
-This has resulted in the loss of most of our networking equipment, our
-lightbulbs, most of our radio equipment, some retro equipment we actually
-liked, lots of auxillary tools, and other inconveniences.
+This has resulted in the loss of most of our networking equipment, most of our
+radio equipment, some retro equipment we actually liked, lots of auxillary
+tools, and other inconveniences.
 
 
 ## Background / flashpoints
